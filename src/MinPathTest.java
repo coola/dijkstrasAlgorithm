@@ -53,6 +53,7 @@ public class MinPathTest {
     @Test
     public void twoEdges() throws Exception {
         assertMinPath("A1B,B1Z", 2, ANY);
+        assertMinPath("A1B,B1Z", 2, "[A, B, Z]");
     }
 }
 
@@ -65,25 +66,28 @@ class PathFinder {
     }
 
     public void findPath(String begin, String end) {
-        if (edges.size() == 0)
-            return;
+        List<String> p = new ArrayList<>();
+        int l = 0;
+        p.add(begin);
 
-        else if (edges.size() == 1) {
-            Edge edge = edges.get(0);
-            if (edge.begin.equals(begin) && edge.end.equals(end)) {
-                path.add(edge.begin);
-                path.add(edge.end);
-                length += edge.length;
-            }
-        } else {
-            for (Edge edge : edges) {
-                if (edge.begin.equals(begin) || edge.end.equals(end)) {
-                    path.add(edge.begin);
-                    path.add(edge.end);
-                    length += edge.length;
-                }
+        for (Edge e = findEdge(begin);
+             e != null; e = findEdge(e.end)) {
+            p.add(e.end);
+            l += e.length;
+            if (e.end.equals(end)) {
+                length = l;
+                path = p;
+                return;
             }
         }
+    }
+
+    private Edge findEdge(String begin) {
+        for (Edge e : edges) {
+            if (e.begin.equals(begin))
+                return e;
+        }
+        return null;
     }
 
     public int getLength() {
