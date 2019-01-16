@@ -52,8 +52,9 @@ public class MinPathTest {
 
     @Test
     public void twoEdges() throws Exception {
-        assertMinPath("A1B,B1Z", 2, ANY);
         assertMinPath("A1B,B1Z", 2, "[A, B, Z]");
+        assertMinPath("B1Z,A1B", 2, "[A, B, Z]");
+        assertMinPath("A1X,Y1Z", 0, "[]");
     }
 }
 
