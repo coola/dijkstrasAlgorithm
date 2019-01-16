@@ -21,14 +21,16 @@ public class MinPathTest {
 
     private PathFinder makePathFinder(String graph) {
         PathFinder pf = new PathFinder();
-        Pattern edgePattern =
-                Pattern.compile("(\\D+)(\\d+)(\\D+)");
-        Matcher matcher = edgePattern.matcher(graph);
-        if (matcher.matches()) {
-            String start = matcher.group(1);
-            int length = Integer.parseInt(matcher.group(2));
-            String end = matcher.group(3);
-            pf.addEdge(start, end, length);
+        Pattern edgePattern = Pattern.compile("(\\D+)(\\d+)(\\D+)");
+        String[] edges = graph.split(",");
+        for (String edge : edges) {
+            Matcher matcher = edgePattern.matcher(edge);
+            if (matcher.matches()) {
+                String start = matcher.group(1);
+                int length = Integer.parseInt(matcher.group(2));
+                String end = matcher.group(3);
+                pf.addEdge(start, end, length);
+            }
         }
         pf.findPath("A", "Z");
         return pf;
@@ -36,16 +38,21 @@ public class MinPathTest {
 
     @Test
     public void degenerateCases() throws Exception {
-        assertMinPath("", 0, "[]");   //empty graph
-        assertMinPath("A", 0, "[]");  //one node
-        assertMinPath("B1C", 0, "[]");//no start or end
-        assertMinPath("A1C", 0, "[]");//no end
-        assertMinPath("B1Z", 0, "[]");//no start
+        assertMinPath("", 0, "[]");   //jeden graf
+        assertMinPath("A", 0, "[]");  //jeden wierzchołek
+        assertMinPath("B1C", 0, "[]");//nie ma ani początku ani końca
+        assertMinPath("A1C", 0, "[]");//nie ma końca
+        assertMinPath("B1Z", 0, "[]");//nie ma początku
     }
 
     @Test
     public void oneEdge() throws Exception {
         assertMinPath("A2Z", 2, "[A, Z]");
+    }
+
+    @Test
+    public void twoEdges() throws Exception {
+        assertMinPath("A1B,B1Z", 2, ANY);
     }
 }
 
@@ -58,11 +65,23 @@ class PathFinder {
     }
 
     public void findPath(String begin, String end) {
-        for (Edge edge : edges) {
+        if (edges.size() == 0)
+            return;
+
+        else if (edges.size() == 1) {
+            Edge edge = edges.get(0);
             if (edge.begin.equals(begin) && edge.end.equals(end)) {
-                length += edge.length;
                 path.add(edge.begin);
                 path.add(edge.end);
+                length += edge.length;
+            }
+        } else {
+            for (Edge edge : edges) {
+                if (edge.begin.equals(begin) || edge.end.equals(end)) {
+                    path.add(edge.begin);
+                    path.add(edge.end);
+                    length += edge.length;
+                }
             }
         }
     }
