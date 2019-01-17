@@ -1,3 +1,5 @@
+package dijkstrasAlg;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -20,7 +22,8 @@ public class MinPathTest {
 
     private PathFinder makePathFinder(String graph) {
         PathFinder pf = new PathFinder();
-        Pattern edgePattern = Pattern.compile("(\\D+)(\\d+)(\\D+)");
+        Pattern edgePattern =
+                Pattern.compile("(\\D+)(\\d+)(\\D+)");
         String[] edges = graph.split(",");
         for (String edge : edges) {
             Matcher matcher = edgePattern.matcher(edge);
@@ -46,6 +49,7 @@ public class MinPathTest {
 
     @Test
     public void oneEdge() throws Exception {
+        assertMinPath("A1Z", 1, "[A, Z]");
         assertMinPath("A2Z", 2, "[A, Z]");
     }
 
@@ -66,7 +70,13 @@ public class MinPathTest {
     public void OnlyOnePath() throws Exception {
         assertMinPath("A1B,B2C,C3Z,B4D,D6E", 6, "[A, B, C, Z]");
         assertMinPath("A1B,B2C,C3D,C3Z", 6, "[A, B, C, Z]");
+    }
+
+    @Test
+    public void parallelPaths() throws Exception {
         assertMinPath("A1B,B2Z,A1Z", 1, "[A, Z]");
+        assertMinPath("A1B,A1C,A2D,C5E,B8E,C1F,D3F,F2G,G3Z,E2G",
+                7,"[A, C, F, G, Z]");
     }
 }
 
@@ -79,7 +89,9 @@ class PathFinder {
     public void findPath(String begin, String end) {
         List<String> unvisited = initializeSearch(begin, end);
 
-        for (String node = begin; node != null && !node.equals(end); node = getNext(unvisited)) {
+        for (String node = begin;
+             node != null && !node.equals(end);
+             node = getNext(unvisited)) {
             unvisited.remove(node);
             visit(node);
         }
