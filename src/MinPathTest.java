@@ -79,8 +79,7 @@ class PathFinder {
     public void findPath(String begin, String end) {
         List<String> unvisited = initializeSearch(begin, end);
 
-        for (String node = begin;
-             node != null; node = getNext(unvisited)) {
+        for (String node = begin; node != null && !node.equals(end); node = getNext(unvisited)) {
             unvisited.remove(node);
             visit(node);
         }
@@ -125,12 +124,17 @@ class PathFinder {
     }
 
     private String getNext(List<String> unvisited) {
+        String minNodeName = null;
+        int minLength = Integer.MAX_VALUE;
+
         for (String name : unvisited) {
             Node candidate = nodes.get(name);
-            if (candidate.length != Integer.MAX_VALUE)
-                return name;
+            if (candidate.length < minLength) {
+                minLength = candidate.length;
+                minNodeName = name;
+            }
         }
-        return null;
+        return minNodeName;
     }
 
     private List<Edge> findEdges(String begin) {
