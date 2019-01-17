@@ -66,6 +66,7 @@ public class MinPathTest {
     public void OnlyOnePath() throws Exception {
         assertMinPath("A1B,B2C,C3Z,B4D,D6E", 6, "[A, B, C, Z]");
         assertMinPath("A1B,B2C,C3D,C3Z", 6, "[A, B, C, Z]");
+        assertMinPath("A1B,B2Z,A1Z", 1, "[A, Z]");
     }
 }
 
@@ -104,10 +105,14 @@ class PathFinder {
         Node curNode = nodes.get(node);
         for (Edge e : neighbors) {
             Node nbr = nodes.get(e.end);
-            nbr.length = curNode.length + e.length;
-            nbr.path = new ArrayList<String>();
-            nbr.path.addAll(curNode.path);
-            nbr.path.add(node);
+
+            int newLength = curNode.length + e.length;
+            if (nbr.length > newLength) {
+                nbr.length = newLength;
+                nbr.path = new ArrayList<String>();
+                nbr.path.addAll(curNode.path);
+                nbr.path.add(node);
+            }
         }
     }
 

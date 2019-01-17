@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a92c8fb-e52d-4ebe-a2b4-0af090e468dc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MinPathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinPathTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MinPathTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="447">
+              <caret line="116" column="5" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4323#4324#0" expanded="true" />
@@ -141,7 +142,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.MinPathTest.OnlyOnePath">
+  <component name="RunManager" selected="JUnit.MinPathTest">
     <configuration name="All in dijkstrasAlgorithm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="dijkstrasAlgorithm" />
       <option name="PACKAGE_NAME" value="" />
@@ -198,8 +199,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MinPathTest.OnlyOnePath" />
         <item itemvalue="JUnit.MinPathTest" />
+        <item itemvalue="JUnit.MinPathTest.OnlyOnePath" />
         <item itemvalue="JUnit.All in dijkstrasAlgorithm" />
         <item itemvalue="JUnit.MinPathTest.twoEdges" />
         <item itemvalue="JUnit.MinPathTest.oneEdge" />
@@ -207,12 +208,6 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="MinPathTest_twoEdges - 2019.01.16 at 15h 33m 52s.xml">
-      <configuration name="MinPathTest.twoEdges" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MinPathTest - 2019.01.16 at 15h 34m 35s.xml">
-      <configuration name="MinPathTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="MinPathTest_twoEdges - 2019.01.16 at 15h 38m 40s.xml">
       <configuration name="MinPathTest.twoEdges" configurationId="JUnit" />
     </history-entry>
@@ -237,6 +232,12 @@
     <history-entry file="MinPathTest_OnlyOnePath - 2019.01.17 at 09h 53m 25s.xml">
       <configuration name="MinPathTest.OnlyOnePath" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="MinPathTest - 2019.01.17 at 10h 24m 47s.xml">
+      <configuration name="MinPathTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MinPathTest - 2019.01.17 at 10h 25m 09s.xml">
+      <configuration name="MinPathTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="1072" width="1936" height="1056" extended-state="6" />
@@ -252,8 +253,8 @@
       <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.30985916" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3997833" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30985916" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -281,25 +282,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MinPathTest.java</url>
-          <line>91</line>
+          <line>92</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MinPathTest.java</url>
-          <line>97</line>
+          <line>98</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MinPathTest.java</url>
-          <line>86</line>
+          <line>87</line>
           <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MinPathTest.java</url>
-          <line>114</line>
+          <line>119</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
@@ -375,8 +376,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MinPathTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="447">
+          <caret line="116" column="5" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4323#4324#0" expanded="true" />
