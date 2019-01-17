@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,51 +55,100 @@ public class MinPathTest {
         assertMinPath("B1Z,A1B", 2, "[A, B, Z]");
         assertMinPath("A1X,Y1Z", 0, "[]");
     }
+
+    @Test
+    public void threeEdges() throws Exception {
+        assertMinPath("A2B,B3C,C4Z", 9, "[A, B, C, Z]");
+        assertMinPath("B3C,C4Z,A2B", 9, "[A, B, C, Z]");
+    }
+
+    @Test
+    public void OnlyOnePath() throws Exception {
+        assertMinPath("A1B,B2C,C3Z,B4D,D6E", 6, "[A, B, C, Z]");
+        assertMinPath("A1B,B2C,C3D,C3Z", 6, "[A, B, C, Z]");
+    }
 }
 
 class PathFinder {
     private List<Edge> edges = new ArrayList<>();
-    private List<String> path = new ArrayList<>();
-    private int length;
-
-    public PathFinder() {
-    }
+    private Set<String> nodeNames = new HashSet<>();
+    private Map<String, Node> nodes = new HashMap<>();
+    private Node endNode;
 
     public void findPath(String begin, String end) {
-        List<String> p = new ArrayList<>();
-        int l = 0;
-        p.add(begin);
+        List<String> unvisited = initializeSearch(begin, end);
 
-        for (Edge e = findEdge(begin);
-             e != null; e = findEdge(e.end)) {
-            p.add(e.end);
-            l += e.length;
-            if (e.end.equals(end)) {
-                length = l;
-                path = p;
-                return;
-            }
+        for (String node = begin;
+             node != null; node = getNext(unvisited)) {
+            unvisited.remove(node);
+            visit(node);
+        }
+
+        setupEndNode(end);
+    }
+
+    private List<String> initializeSearch(String begin,
+                                          String end) {
+        nodeNames.add(begin);
+        nodeNames.add(end);
+        List<String> unvisited = new ArrayList<>(nodeNames);
+        for (String node : unvisited)
+            nodes.put(node, new Node(Integer.MAX_VALUE));
+
+        nodes.get(begin).length = 0;
+        return unvisited;
+    }
+
+    private void visit(String node) {
+        List<Edge> neighbors = findEdges(node);
+        Node curNode = nodes.get(node);
+        for (Edge e : neighbors) {
+            Node nbr = nodes.get(e.end);
+            nbr.length = curNode.length + e.length;
+            nbr.path = new ArrayList<String>();
+            nbr.path.addAll(curNode.path);
+            nbr.path.add(node);
         }
     }
 
-    private Edge findEdge(String begin) {
-        for (Edge e : edges) {
-            if (e.begin.equals(begin))
-                return e;
+    private void setupEndNode(String end) {
+        endNode = nodes.get(end);
+        if (endNode.length != Integer.MAX_VALUE)
+            endNode.path.add(end);
+        else
+            endNode.length = 0;
+    }
+
+    private String getNext(List<String> unvisited) {
+        for (String name : unvisited) {
+            Node candidate = nodes.get(name);
+            if (candidate.length != Integer.MAX_VALUE)
+                return name;
         }
         return null;
     }
 
+    private List<Edge> findEdges(String begin) {
+        List<Edge> found = new ArrayList<>();
+        for (Edge e : edges) {
+            if (e.begin.equals(begin))
+                found.add(e);
+        }
+        return found;
+    }
+
     public int getLength() {
-        return length;
+        return endNode.length;
     }
 
     public List<String> getPath() {
-        return path;
+        return endNode.path;
     }
 
     public void addEdge(String start, String end, int length) {
         edges.add(new Edge(start, end, length));
+        nodeNames.add(start);
+        nodeNames.add(end);
     }
 
     private static class Edge {
@@ -112,6 +160,16 @@ class PathFinder {
             this.begin = begin;
             this.end = end;
             this.length = length;
+        }
+    }
+
+    private static class Node {
+        public int length;
+        public List<String> path;
+
+        public Node(int l) {
+            this.length = l;
+            this.path = new ArrayList<>();
         }
     }
 }
